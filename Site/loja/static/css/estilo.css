@@ -190,6 +190,22 @@ nav ul li:hover {
 .produtos_filtros{
     border-color: white;
 }
-.items_filtro{
-    
+
+
+.produtos{
+  display: flex;
+  flex-wrap: wrap; /* permite quebra de linha */
+  gap: 16px; /* espaço entre os itens */
+  justify-content: center; /* centraliza os itens */
+}
+.produto{
+   flex: 1 1 150px; /* cresce, encolhe e base mínima de 150px */
+  max-width: 200px; /* opcional para limitar tamanho máximo */
+  box-sizing: border-box;
+  padding: 8px;
+  text-align: center;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+
 }
