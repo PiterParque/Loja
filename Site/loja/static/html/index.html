@@ -11,14 +11,18 @@
     <main>
     <header>
         <form action="GET">
-        <img src="{% static '/imagens/logo.jpg'%}" alt="">
-        <h1>Ni Emportados</h1>
-        <input type="search" placeholder="Pesquisar">
-        <button type="submit">Buscar</button>
-        <img class="icone_perfil" src="{% static '/imagens/icone_perfil.jpg'%}" alt="">
-        <img class="chat" src="{% static '/imagens/chat.jpg'%}" alt="">
+        <img class="logo"  src="{% static '/imagens/logo.png'%}" alt="">
+        <h1 class="titulo">Ni Emportados</h1>
         </form>
+      
     </header>
+    <div class="div_pesquisar">
+        <input type="search" placeholder="Pesquisar" class="pesquisar">
+        <button type="submit" class="buscar">Buscar</button>
+        <img  class="chat" src="{% static './imagens/chat.jpg'%}" alt="">
+        <img  class="perfil" src="{% static './imagens/icone_perfil.jpg'%}" alt="">
+        
+    </div>
     <button class="anterior">&#10094;</button>
     <div class="carrosel">
         <div class="carrosel-item">
@@ -41,7 +45,47 @@
             <li>CABELOS</li>
         </ul>
     </nav>
+    <div class="produtos_filtros">
+        <div class="filtros">
+             <p class="filtros_titulo">Filtros</p>
+             <section class="filtro_item">
+                <button aria-expanded="false" aria-controls="maquiagem-lista" class="filtro-titulo">
+                <p class="titulo_filtro">MAQUIAGEM</p>
+                <span aria-hidden="true">▼</span>
+                </button>
+            </section>
+             <section class="filtro_item">
+                <button aria-expanded="false" aria-controls="preco-lista" class="filtro-titulo">
+                <p class="titulo_filtro">MARCA</p>
+                <span aria-hidden="true">▼</span>
+                </button>
+            </section>
+             <section class="filtro_item">
+                <button aria-expanded="false" aria-controls="preco-lista" class="filtro-titulo filtro-preco">
+                <p class="titulo_filtro">PREÇO</p>
+                <span aria-hidden="true">▼</span>
+                </button>
+                <div class="items_filtro"><p>ROSTO</p></div>
+             </section>
+             <section class="filtro_item">
+                <button aria-expanded="false" aria-controls="preco-lista" class="filtro-titulo">
+                <p class="titulo_filtro">DESCONTO</p>
+                <span aria-hidden="true">▼</span>
+             </section>
+           
+        </div>
+        <div class="produtos">
+            <div class="produto">
+                <img src="{% static '/imagens/produto_1.png'%}" alt="">
+                <p class="titulo_produto">Titulo do produto</p>
+                <p class="descricao_produto">Descrição pruduto</p>
+                <p class="valor_produto">300.00</p>
+
+            </div>
+        </div>
+    </div>
     </main>
+    <footer>Rodape</footer>
     <script src="{% static '/javascript/index.js'%}"></script>
 </body>
 </html>
