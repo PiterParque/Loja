@@ -1,29 +1,38 @@
-const slides = document.querySelectorAll('.carrosel-item');
-const btnProximo = document.querySelector('.proximo');
-const btnAnterior = document.querySelector('.anterior');
+let index = 0;
+const slides = document.querySelectorAll('.slider');
 
-let indiceAtual = 0;
-
-function mostrarSlide(indice) {
-    slides.forEach(slide => slide.classList.remove('ativo'));
-    slides[indice].classList.add('ativo');
+function showSlide(n) {
+    slides.forEach(slide => slide.classList.remove('on'));
+    slides[n].classList.add('on');
 }
 
-btnProximo.addEventListener('click', () => {
-    indiceAtual = (indiceAtual + 1) % slides.length;
-    mostrarSlide(indiceAtual);
+function nextSlide() {
+    index = (index + 1) % slides.length;
+    showSlide(index);
+}
+
+function prevSlide() {
+    index = (index - 1 + slides.length) % slides.length;
+    showSlide(index);
+}
+
+// Troca automática a cada 4s
+setInterval(nextSlide, 4000);
+
+showSlide(index);
+
+
+// Carrossel de produtos
+const lista = document.getElementById('lista-produtos');
+const btnPrev = document.getElementById('prev');
+const btnNext = document.getElementById('next');
+
+const scrollAmount = 250; // distância em px que o carrossel anda a cada clique
+
+btnNext.addEventListener('click', () => {
+  lista.scrollBy({ left: scrollAmount, behavior: 'smooth' });
 });
 
-btnAnterior.addEventListener('click', () => {
-    indiceAtual = (indiceAtual - 1 + slides.length) % slides.length;
-    mostrarSlide(indiceAtual);
+btnPrev.addEventListener('click', () => {
+  lista.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
 });
-
-// Inicia mostrando o primeiro
-mostrarSlide(indiceAtual);
-
-// Troca automática a cada 5 segundos
-setInterval(() => {
-    indiceAtual = (indiceAtual + 1) % slides.length;
-    mostrarSlide(indiceAtual);
-}, 5000);

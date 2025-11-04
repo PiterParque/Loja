@@ -1,0 +1,50 @@
+{% load static %}
+
+  <div class="produto_pricipal">
+      <div class="produto-item-pricipal">
+        <div class="sliders">
+          <div class="slidess">
+            <input type="radio" name="radio-btn" id="radio1">
+            <input type="radio" name="radio-btn" id="radio2">
+            <input type="radio" name="radio-btn" id="radio3">
+            <input type="radio" name="radio-btn" id="radio4">
+          </div>
+          <div class="slide_first">
+             <img src="{% static '/imagens/perfumes_1.jpg'%}" alt="imagem 1">
+          </div>
+          <div class="slide_">
+             <img src="{% static '/imagens/perfumes_2.jpg'%}" alt="imagem 2">
+          </div>
+          <div class="slide_">
+             <img src="{% static '/imagens/perfumes_3.jpg'%}" alt="imagem 3">
+          </div>
+          <div class="slide_">
+             <img src="{% static '/imagens/perfumes_3.jpg'%}" alt="imagem 4">
+          </div>
+          <div class="navigation-auto">
+            <div class="auto-btn1"></div>
+            <div class="auto-btn2"></div>
+            <div class="auto-btn3"></div>
+            <div class="auto-btn4"></div>
+          </div>
+        </div>
+        <div class="manual-navigation">
+          <label for="radio1" class="manual-btn"></label>
+          <label for="radio2" class="manual-btn"></label>
+          <label for="radio3" class="manual-btn"></label>
+          <label for="radio4" class="manual-btn"></label>
+        </div>
+
+      </div>
+        <p class="Titulo_outros_produtos">Outros Produtos</p>
+                <div class="produto">
+                    <img src="{% static '/imagens/produto_1.png'%}" alt="">
+                    <p class="titulo_produto">Titulo do produto</p>
+                    <p class="descricao_produto">Descrição pruduto</p>
+                    <p class="valor_produto">300.00</p>
+                </div>
+      </div>
+
+  </div>
+
+   
