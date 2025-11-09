@@ -36,3 +36,5 @@ btnNext.addEventListener('click', () => {
 btnPrev.addEventListener('click', () => {
   lista.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
 });
+
+console.log("Ola");

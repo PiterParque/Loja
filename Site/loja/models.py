@@ -25,6 +25,7 @@ class Produto(models.Model):
     ativo = models.BooleanField(default=True)
     data_cadastro = models.DateTimeField(auto_now_add=True)
     slug = models.SlugField(unique=True)
+    ml=models.CharField(max_length=5,null=False,default='0')
 
     def __str__(self):
         return self.nome

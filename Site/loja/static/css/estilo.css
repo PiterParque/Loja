@@ -7,7 +7,7 @@ body {
 
 header {
     background-color: #1c1c1b;
-    color: #D4AF37;
+    color: #F1E5AC;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -39,7 +39,7 @@ header input {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #D4AF37;
+    background-color: #f3dc68;
     margin: 0;
     padding: 10px 0;
 }
@@ -48,6 +48,10 @@ header input {
     margin: 0 15px;
     font-size: 20px;
     cursor: pointer;
+}
+
+.carrosel{
+    padding-bottom: 10px;
 }
 
 nav {
@@ -70,6 +74,7 @@ nav {
     width: 600px;
     height: 500px;
     overflow: hidden;
+    margin-top: 10px;
 }
 
 .slider {
@@ -147,7 +152,7 @@ footer {
   overflow-x: auto;
   scroll-behavior: smooth;
   scroll-snap-type: x mandatory;
-  padding: 20px 10px;
+  padding: 10px 10px;
   
 }
 
@@ -203,4 +208,108 @@ footer {
 .carrossel-produtos button:hover {
   background: rgba(0,0,0,0.8);
   
+}
+.imagens img{
+  width: 100px;
+  height: 100px;
+}
+
+.produto-container {
+  display: flex;
+  gap: 20px;
+}
+
+.galeria {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* MINIATURAS */
+.thumbnails {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.thumbnails img {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  cursor: pointer;
+  border: 2px solid transparent;
+  border-radius: 5px;
+  transition: transform 0.2s, border 0.2s;
+}
+
+.thumbnails img:hover {
+  transform: scale(1.05);
+}
+
+.thumbnails img.active {
+  border: 2px solid #000;
+}
+
+/* IMAGEM PRINCIPAL */
+.main-image {
+  position: relative;
+}
+
+.main-image img {
+  width: 400px;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* BOTÕES */
+.btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0,0,0,0.5);
+  color: white;
+  border: none;
+  font-size: 24px;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+.seta-esquerda { left: 10px; transform: rotate(00deg);}
+.seta-direita { right: 10px; transform: rotate(180deg);}
+.descricao img{
+  padding: 0;
+  width: 20px;
+  height: 20px;
+}
+.descricao button{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 5px;
+}
+.comprar_carrinho{
+  display: flex;
+}
+.produto-principal{
+  display: flex;
+  width: 70%;
+  margin: 1%  15% 1% 15%;
+}
+.descricao{
+  padding-left: 10px;
+}
+.descricao{
+  margin-left: 5px;
+  border: solid #888 1px;
+}
+.Tambem_indicado{
+  text-align: center;
+  font-size: 25px;
 }
