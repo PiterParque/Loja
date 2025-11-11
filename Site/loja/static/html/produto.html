@@ -2,66 +2,78 @@
 {% load static %}
 {% block content_principal %}
 
-<div class="produto-principal">
+  <div class="produto-principal">
 
-  <div class="produto-container">
-    <div class="galeria">
-      <div class="thumbnails">
-        <img src="{% static 'imagens/perfumes_1.jpg' %}" class="thumb active" alt="thumb 1">
-        <img src="{% static 'imagens/perfumes_1.jpg' %}"class="thumb" alt="thumb 2">
-        <img src="{% static 'imagens/perfumes_1.jpg' %}" class="thumb" alt="thumb 3">
-        <img src="{% static 'imagens/perfumes_1.jpg' %}" class="thumb" alt="thumb 4">
-      </div>
+    <div class="produto-container">
+      <div class="galeria">
+        <div class="thumbnails">
+          <img src="{% static 'imagens/perfumes_1.jpg' %}" class="thumb active" alt="thumb 1">
+          <img src="{% static 'imagens/perfumes_2.jpg' %}"class="thumb" alt="thumb 2">
+          <img src="{% static 'imagens/perfumes_3.jpg' %}" class="thumb" alt="thumb 3">
+          <img src="{% static 'imagens/perfumes_1.jpg' %}" class="thumb" alt="thumb 4">
+        </div>
 
-      <div class="main-image">
-        <button class="btn seta-esquerda"><i class="fa-solid fa-angle-left"></i></button>
-        <img id="imagem-principal" src="{% static 'imagens/perfumes_1.jpg' %}" alt="Imagem principal">
-        <button class="btn seta-direita"><i class="fa-solid fa-angle-left"></i></button>
+        <div class="main-image">
+          <button class="btn seta-esquerda"><i class="fa-solid fa-angle-left"></i></button>
+          <img id="imagem-principal" src="{% static 'imagens/perfumes_1.jpg' %}" alt="Imagem principal">
+          <button class="btn seta-direita"><i class="fa-solid fa-angle-left"></i></button>
+        </div>
       </div>
+    </div>
+
+    <div class="descricao">
+      <p class="nome_produto">La Roche-Posay</p>
+      <p class="sub_titulo_produto">
+        Protetor Solar Facial com Cor Alta Cobertura e Toque Seco FPS 60 La Roche-Posay Anthelios Ultra Cover 3.0
+      </p>
+      <p class="valor_produto">R$ 64,90</p>
+      <div class="comprar_carrinho">
+        <button class="comprar">
+          <p>Comprar</p>
+          <img src="{% static 'imagens/money.png' %}" alt="icone_carrinho" class="icone_carrinho">
+        </button>
+        <button class="button_carrinho">
+          <p>Carrinho</p>
+          <img src="{% static 'imagens/carrinho.png' %}" alt="icone_carrinho" class="icone_carrinho">
+        </button>
+      </div>
+      <p>Consulte o valor e o prazo de entrega.</p>
+      <div class="entrada_cep">
+        <input type="text" placeholder="Digite seu CEP">
+        <button class="calcular_frete">Calcular Frete</button>
+      </div>
+      <p><a href="#">Não sei meu CEP</a></p>
     </div>
   </div>
-
-  <div class="descricao">
-    <p class="nome_produto">La Roche-Posay</p>
-    <p class="sub_titulo_produto">
-      Protetor Solar Facial com Cor Alta Cobertura e Toque Seco FPS 60 La Roche-Posay Anthelios Ultra Cover 3.0
-    </p>
-    <p class="valor_produto">R$ 64,90</p>
-    <div class="comprar_carrinho">
-      <button class="comprar">
-        <p>Comprar</p>
-        <img src="{% static 'imagens/money.png' %}" alt="icone_carrinho" class="icone_carrinho">
-      </button>
-      <button class="button_carrinho">
-        <p>Carrinho</p>
-        <img src="{% static 'imagens/carrinho.png' %}" alt="icone_carrinho" class="icone_carrinho">
-      </button>
+  <div class="descricao_centralizar">
+    <div class="descricao_produto">
+      <p class="titulo_detalhes">Detalhes</p>
+      <p class="detalhes">
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nesciunt totam, culpa maxime similique, iure aliquid recusandae accusamus cumque sapiente, quae possimus libero incidunt doloremque temporibus debitis ipsa animi quod. Ipsam.
+        Quae at doloremque earum quisquam facere excepturi qui itaque illo corporis harum! Laudantium libero dignissimos qui alias quo! Accusamus officia distinctio aliquid commodi quibusdam quasi incidunt deserunt possimus vitae dignissimos?
+        Eos obcaecati natus rem minima, aperiam ad fugit provident, cum dicta doloribus ipsam! Nam, cupiditate, ducimus, id doloribus quaerat earum mollitia nobis ut quidem cum excepturi nostrum aspernatur neque nulla?
+        Ratione eos quisquam, et, ad deleniti similique at officiis, cupiditate perspiciatis aspernatur reiciendis ipsa eligendi sint quod qui rerum dolor voluptatum placeat vel? Eos ea delectus, aperiam consectetur sed suscipit!
+        Amet architecto corporis in iusto aliquam voluptates, ex laudantium, labore, quae dolorum suscipit maxime exercitationem est iste inventore. Excepturi enim deleniti magni id deserunt nihil, dolor cumque tempore perferendis dicta!
+      </p>
     </div>
-    <p>Consulte o valor e o prazo de entrega.</p>
-    <div class="entrada_cep">
-      <input type="text" placeholder="Digite seu CEP">
-      <button class="calcular_frete">Calcular Frete</button>
-    </div>
-    <p><a href="#">Não sei meu CEP</a></p>
   </div>
-</div>
-        <p class="Tambem_indicado">Tambem indicado</p>
-        <div class="carrossel-produtos">
-        <button id="prev"><i class="fa-solid fa-angle-left"></i></button>
-            <div class="lista-produtos" id="lista-produtos">
-                {% for i in "123456789" %}
-                <div class="produto-item">
-                    <img src="{% static 'imagens/perfumes_1.jpg' %}" alt="Perfume {{ i }}">
-                    <p class="titulo-produto">Produto {{ i }}</p>
-                    <p class="sub-titulo-produto">Subtítulo {{ i }}</p>
-                    <p class="valor-produto">R$ 300,00</p>
-                </div>
-                {% endfor %}
-            </div>
-        <button id="next"><i class="fa-solid fa-angle-right"></i></button>
-        </div>
-        <div id="content">
-        </div>
+  <p class="Tambem_indicado">Tambem indicado</p>
+  <div class="carrossel-produtos">
+  <button id="prev"><i class="fa-solid fa-angle-left"></i></button>
+      <div class="lista-produtos" id="lista-produtos">
+          {% for i in "123456789" %}
+          <div class="produto-item">
+              <img src="{% static 'imagens/perfumes_1.jpg' %}" alt="Perfume {{ i }}">
+              <p class="titulo-produto">Produto {{ i }}</p>
+              <p class="sub-titulo-produto">Subtítulo {{ i }}</p>
+              <p class="valor-produto">R$ 300,00</p>
+          </div>
+          {% endfor %}
+      </div>
+  <button id="next"><i class="fa-solid fa-angle-right"></i></button>
+  </div>
+  <div id="content">
+  </div>
 
 <script src="{% static 'javascript/produto.js' %}" defer></script>
 

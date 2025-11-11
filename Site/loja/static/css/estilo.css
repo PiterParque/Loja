@@ -2,7 +2,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Times New Roman';
-    
+
 }
 
 header {
@@ -11,9 +11,48 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
-    padding-bottom: 10px;
-    
+     
+}
+@media (max-width: 800px) {
+  header{
+  flex-direction: column;
+  }
+
+  .botoes{
+    margin-bottom: 10px;
+  }
+
+  .descricao button{
+     padding: 0;
+     margin: 0;
+  }
+  .descricao{
+    width: fit-content;
+    height: fit-content;
+  }
+  .thumbnails img{
+    width: 50px;
+    height: 50px;
+  }
+  .produto-principal {
+    flex-direction: column;
+  }
+  .menus li{
+    font-size: 1px;
+  }
+  .thumbnails{
+    position: absolute;
+    left: -9999px;
+  }
+  .produto-container{
+    display: flex;
+    flex-direction: column;
+  }
+  #imagem-principal {
+   width:100%; 
+   height: min-content;
+  }
+
 }
 
 header h1 {
@@ -21,17 +60,18 @@ header h1 {
 }
 
 header button {
-    margin: 10px 10px 0 10px;
     border-radius: 40px;
     border: none;
     cursor: pointer;
 }
+.logo_header{
+  display: flex;
+  
+}
 
-header input {
-    margin: 10px 10px 0 10px;
-    width: 50%;
-    border-radius: 40px;
-    padding: 5px 15px;
+header input{
+ border-radius: 10px;
+ width:250px ;
 }
 
 .cabecalho ul {
@@ -256,8 +296,8 @@ footer {
 }
 
 .main-image img {
-  width: 400px;
-  height: 400px;
+  min-width: 300px;
+  max-height: 300px;
   object-fit: cover;
   border-radius: 10px;
 }
@@ -299,8 +339,8 @@ footer {
 }
 .produto-principal{
   display: flex;
-  width: 70%;
-  margin: 1%  15% 1% 15%;
+  align-content: center;
+  justify-content: center;
 }
 .descricao{
   padding-left: 10px;
@@ -313,3 +353,28 @@ footer {
   text-align: center;
   font-size: 25px;
 }
+.entrada_cep{display: flex;}
+.titulo_detalhes{
+  font-size: 25px;
+}
+.descricao_produto{
+  margin-top: 5px;
+  border: solid #888 1px;
+  border-radius: 10px;
+}
+.descricao_produto{
+  width: fit-content;
+}
+.descricao_centralizar{
+  justify-items: center;
+  align-items: center;
+}
+.entrada_pesquisar{
+    background-color: #000;
+}
+  .descricao_produto{
+    max-width: 1100px;
+  }
+  .galeria{
+     width: 50%;
+  }

@@ -19,12 +19,16 @@
             
             <div class="cabecalho">
                 <header>
+                    <div class="logo_header">
                     <img class="logo" src="{% static 'imagens/logo.png' %}" alt="Logo NL Importados">
                     <h1 class="titulo">NL Importados</h1>
-                    <input type="search" name="pesquisar" placeholder="Pesquisar">
+                    </div>
+                    <div class="botoes">
+                    <input type="search" class="pesquisar" name="entrada_pesquisar" placeholder="Pesquisar">
                     <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
                     <button type="button"><i class="fa-solid fa-circle-user"></i></button>
                     <button type="button"><i class="fa-solid fa-cart-shopping"></i></button>
+                    </div>
                 </header>
 
                 <nav class="menus">
