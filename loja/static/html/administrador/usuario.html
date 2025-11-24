@@ -1,10 +1,18 @@
 {% extends './administracao.html' %}
 {% load static %}
 {% block conteudo%}
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer" />
 <div class="usuario">
  {% if usuario %}
    <div class="perfil_usuario">
-    <img src="{% static 'imagens/usuario_sem_foto.png' %}" alt="" class="foto_usuario">
+    <form action="" method="post">
+    <button type="button" class="foto">
+      <i class="fa-solid fa-camera"></i>
+      <img src="{% static 'imagens/usuario_sem_foto.png' %}" alt="" class="foto_usuario">
+    </button>
     <div>
     <p>NOME: <input type="text" name="usuario_nome" id="usuario_nome" value="{{usuario.nome}}"></p>
     <p>CPF:<input type="text" name="usuario_cpf" id="usuario_cpf" value="{{usuario.CPF}}"></p>
@@ -17,16 +25,16 @@
     <p>GENERO:<input type="text" name="usuario_nome" id="usuario_nome" value="{{usuario.genero}}"></p>
     <p>TIPO DE USUARIO:<input type="text" name="usuario_nome" id="usuario_nome" value="{{usuario.tipo_usuario}}"></p>
     </div>
-   
-       <div class="botoes_usuario">
+    <div class="botoes_usuario">
        <button type="button">SALVAR</button>
        <button type="button">DESABILITAR</button>
-       </div>
+       </form>
+    </div>
     
 
 
  {% else %}
-<p>Uusaro não encotrador</p>
+<p>Usuaro não encotrador</p>
  {% endif %}
 
 </div>

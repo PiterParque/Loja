@@ -93,3 +93,10 @@ def usuario(request,id):
         
 
     return render(request,"./loja/static/html/administrador/usuario.html",{'usuario':_usuario})
+def criar_usuario(request):
+    usuario_id = request.session.get('usuario_id')
+    user=Usuario.objects.filter(id=usuario_id).first()
+    if user :
+        if user.tipo_usuario != "Admisnitrador":
+            redirect('perfil')
+    return render(request,"./loja/static/html/administrador/usuario_criar.html")

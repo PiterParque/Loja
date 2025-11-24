@@ -1,6 +1,10 @@
 {% extends './administracao.html' %}
 {% load static %}
 {% block conteudo%}
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer" />
 <div class="tabela">
  <form action="" method="post" class="form_pesquisar_usuarios">
   <select name="filtro" id="filtro">
@@ -13,6 +17,7 @@
     <option value="TIPO_DE_USUARIO">TIPO DE USUARIO</option>
   </select>
   <input type="search" name="pesquisar_usuarios" id="">
+  <button type="button" onclick="window.location.href='{% url 'usuario_criar' %}'" class="BUTTON_CRIAR_USAURIOS"><i class="fa-solid fa-user"></i>  CRIAR USUARIO</button>
   </form>
 
  <table class="tabela_usuarios">

@@ -14,5 +14,6 @@ urlpatterns=[
     path('perfil/notificacao',views.notificacao,name="notificacao"),
     path('administracao',views.administracao,name='administracao'),
     path('administracao/usuarios',views.usaurios,name="usuarios"),
-    path('administracao/usuario/<int:id>',views.usuario,name="usuario")
+    path('administracao/usuario/<int:id>',views.usuario,name="usuario"),
+    path('administracao/usuario/criar',views.criar_usuario,name="usuario_criar")
 ]

@@ -7,13 +7,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Administração</title>
     <link rel="stylesheet" href="{% static 'html/administrador/administracao.css' %}">
+            <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer" />
 </head>
 <body>
     <h1 class="Titulo">Administração</h1>
         <div class="principal">
             <nav class="menus_administracao">
                 <ul>
-                    <li> <a href="{% url 'usuarios' %}">USUARIOS/CLIENTES</a></li>
+                    <li><i class="fa-solid fa-user"></i> <a href="{% url 'usuarios' %}">USUARIOS/CLIENTES</a></li>
                     <li>PRODUTOS</li>
                     <li>PEDIDOS</li>
                 </ul>

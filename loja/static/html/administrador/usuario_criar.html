@@ -1,0 +1,33 @@
+{% extends './administracao.html' %}
+{% load static %}
+{% block conteudo%}
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer" />
+<div class="usuario">
+
+   <div class="perfil_usuario">
+    <form action="" method="post">
+    <button type="button" class="foto">
+      <i class="fa-solid fa-camera"></i>
+      <img src="{% static 'imagens/usuario_sem_foto.png' %}" alt="" class="foto_usuario">
+    </button>
+    <div>
+    <p>NOME: <input type="text" name="usuario_nome" id="usuario_nome" placeholder="NOME COMPLETO"></p>
+    <p>CPF:<input type="text" name="usuario_cpf" id="usuario_cpf" placeholder="CPF" ></p>
+    </div>
+    <div>
+    <p>DATA DE NASCIMENTO:<input type="text" name="usuario_nascimento" id="usuario_nascimento" placeholder="DATA DE NASCIMENTO" ></p>
+    <p>TELEFONE:<input type="text" name="usuario_telefone" id="usuario_telefone" placeholder="TELEFONE"></p>
+    </div>
+    <div>
+    <p>GENERO:<input type="text" name="usuario_nome" id="usuario_nome" placeholder="GENERO" ></p>
+    <p>TIPO DE USUARIO:<input type="text" name="usuario_nome" id="usuario_nome" placeholder="TIPO DE USUARIO"></p>
+    </div>
+    <div class="botoes_usuario">
+       <button type="button">CRIAR</button>
+       </form>
+    </div>
+</div>
+{%endblock%}
