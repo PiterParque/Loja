@@ -1,0 +1,152 @@
+body{
+    padding: 0;
+    margin: 0;
+    color: #cbc3b5;
+    background-color: rgb(28, 28, 28);
+    height: 100%;
+    width: 100%; 
+    
+}
+.Titulo{
+    font-size: 50px;
+}
+
+.principal{
+   display: flex;
+   height: 100%;
+   width: 100%; 
+
+}
+.menus_administracao{
+    background-color: #ac9d85;
+    list-style: none;     
+}
+.menus_administracao li{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+}
+
+.menus_administracao a{
+  color: #f0e4cd;
+  font-size: 25px;
+
+
+}
+.conteudo{
+  background-color: white;
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  border: 1px solid black;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+  color: black;
+}
+a{
+  text-decoration: none;
+}
+.tabela_usuarios{ 
+ 
+  border: solid black 2px;
+  background-color: rgb(29, 29, 29);
+}
+.tabela_usuarios p{
+ text-align: start;
+ font-size: 20px;
+}
+
+.tabela_usuarios td{
+  border:none;
+}
+.tabela_usuarios td a{
+  color:#987d60;;
+}
+.tabela_usuarios th{
+  color: #e5cca1;
+  border-left:none ;
+  border-right: none;
+  background-color: rgb(27, 28, 28);
+}
+ul,li{
+ padding: 0;
+ margin: 0;
+}
+select,option{
+  color: #e5cca1;
+  background-color: rgb(29, 29, 29);
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+input{
+color: #e5cca1;
+height: 30px;
+background-color:#383127 ;
+font-size: large;
+margin: 0;
+padding: 0;
+}
+select,option{
+  height: 30px;
+  font-size: 15px;
+}
+.usuario{
+  padding-left: 10px;
+}
+.perfil_usuario{
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  background-color: rgb(29, 29, 29);
+}
+.perfil_usuario input{
+ width: 100%;
+ margin: 0px 5px;
+}
+.foto_usuario{
+  border-radius: 110px;
+
+}
+.form_pesquisar_usuarios{
+ background-color:rgb(27, 27, 27);
+}
+.botoes_usuario{
+align-content: center;
+background-color: #987d60;
+
+}
+.botoes_usuario button{
+    font-size: 15px;
+    width: 100%;
+}
+@media (max-width: 800px) {
+ body{
+  display: flex;
+  flex-direction: column;
+ }
+ .principal{
+  display: flex;
+  flex-direction: column;
+ }
+ td{
+  width: fit-content;
+  height: fit-content;
+ }
+ form{
+  display: flex;
+ }
+ .perfil_usuario{
+  display: flex;
+  flex-direction: column;
+}
+}

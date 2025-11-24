@@ -1,0 +1,28 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administração</title>
+    <link rel="stylesheet" href="{% static 'html/administrador/administracao.css' %}">
+</head>
+<body>
+    <h1 class="Titulo">Administração</h1>
+        <div class="principal">
+            <nav class="menus_administracao">
+                <ul>
+                    <li> <a href="{% url 'usuarios' %}">USUARIOS/CLIENTES</a></li>
+                    <li>PRODUTOS</li>
+                    <li>PEDIDOS</li>
+                </ul>
+            </nav>
+            <div class="conteudo">
+            {% block conteudo%}
+            
+            {% endblock  %}
+            </div>
+        </div>
+</body>
+</html>

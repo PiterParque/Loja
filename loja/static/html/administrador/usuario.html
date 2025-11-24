@@ -1,0 +1,33 @@
+{% extends './administracao.html' %}
+{% load static %}
+{% block conteudo%}
+<div class="usuario">
+ {% if usuario %}
+   <div class="perfil_usuario">
+    <img src="{% static 'imagens/usuario_sem_foto.png' %}" alt="" class="foto_usuario">
+    <div>
+    <p>NOME: <input type="text" name="usuario_nome" id="usuario_nome" value="{{usuario.nome}}"></p>
+    <p>CPF:<input type="text" name="usuario_cpf" id="usuario_cpf" value="{{usuario.CPF}}"></p>
+    </div>
+    <div>
+    <p>DATA DE NASCIMENTO:<input type="text" name="usuario_nascimento" id="usuario_nascimento" value="{{usuario.data_nascimento}}"></p>
+    <p>TELEFONE:<input type="text" name="usuario_telefone" id="usuario_telefone" value="{{usuario.telefone}}"></p>
+    </div>
+    <div>
+    <p>GENERO:<input type="text" name="usuario_nome" id="usuario_nome" value="{{usuario.genero}}"></p>
+    <p>TIPO DE USUARIO:<input type="text" name="usuario_nome" id="usuario_nome" value="{{usuario.tipo_usuario}}"></p>
+    </div>
+   
+       <div class="botoes_usuario">
+       <button type="button">SALVAR</button>
+       <button type="button">DESABILITAR</button>
+       </div>
+    
+
+
+ {% else %}
+<p>Uusaro não encotrador</p>
+ {% endif %}
+
+</div>
+{% endblock  %}

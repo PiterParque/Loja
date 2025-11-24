@@ -1,0 +1,97 @@
+import os
+from django.db import models
+from django.utils.text import slugify
+
+def produto_image_path(instance, filename):
+    # cria uma pasta com o slug ou ID do produto
+    # ex: produtos/tenis-nike-air/imagem1.jpg
+    return os.path.join('produtos', instance.slug or str(instance.id), filename)
+class Categoria(models.Model):
+    nome = models.CharField(max_length=100)
+    slug = models.SlugField(unique=False)
+
+    def __str__(self):
+        return self.nome
+
+
+class Produto(models.Model):
+    nome = models.CharField(max_length=200)
+    descricao = models.TextField()
+    marca = models.CharField(max_length=100)
+    categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE, related_name='produtos')
+    preco = models.DecimalField(max_digits=10, decimal_places=2)
+    preco_promocional = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    estoque = models.PositiveIntegerField(default=0)
+    sku = models.CharField(max_length=50, unique=True)
+    imagem_principal = models.ImageField(upload_to='./produtos/')
+    tamanho = models.CharField(max_length=50, blank=True, null=True)
+    avaliacao_media = models.DecimalField(max_digits=3, decimal_places=2, default=0)
+    quantidade_avaliacoes = models.PositiveIntegerField(default=0)
+    ativo = models.BooleanField(default=True)
+    data_cadastro = models.DateTimeField(auto_now_add=True)
+    slug = models.SlugField(unique=True)
+    ml=models.CharField(max_length=5,null=False,default='0')
+    
+    def save(self, *args, **kwargs):
+        # Gera slug automaticamente com base no nome, se não existir
+        if not self.slug:
+            self.slug = slugify(self.nome)
+        super().save(*args, **kwargs)
+
+
+    def __str__(self):
+        return self.nome
+class Usuario(models.Model):
+    nome=models.CharField(max_length=30)
+    senha= models.CharField(max_length=128) 
+    CPF=models.CharField(max_length=15)
+    data_nascimento=models.DateTimeField(null=True)
+    telefone=models.CharField(max_length=15)
+    genero=models.CharField(max_length=15)
+    email = models.EmailField(max_length=254, unique=False)
+    tipo_usuario=models.CharField(max_length=200,default="Comum")
+    def __str__(self):
+        return f"{self.nome} <{self.email}>"
+class enderecos(models.Model):
+    user=models.ForeignKey(Usuario,on_delete=models.CASCADE)
+    endereco=models.CharField(max_length=200)
+    cep=models.CharField(max_length=50)
+    def __str__(self):
+        return f"Pedido #{self.id} - {self.user.nome}"
+
+class Pedido(models.Model):
+    STATUS_CHOICES = [
+        ('P', 'Pendente'),
+        ('PAGO', 'Pago'),
+        ('E', 'Enviado'),
+        ('F', 'Finalizado'),
+        ('C', 'Cancelado'),
+    ]
+
+    cliente = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name='pedidos')
+    perfumes = models.ManyToManyField(Produto, through='ItemPedido')
+    data_pedido = models.DateTimeField(auto_now_add=True)
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='P')
+    valor_total = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+
+    def __str__(self):
+        return f"Pedido #{self.id} - {self.nome}"
+
+    def calcular_total(self):
+        total = sum(item.subtotal() for item in self.itens.all())
+        self.valor_total = total
+        self.save()
+        return total
+
+
+class ItemPedido(models.Model):
+    pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE, related_name='itens')
+    perfume = models.ForeignKey(Produto, on_delete=models.CASCADE)
+    quantidade = models.PositiveIntegerField(default=1)
+    preco_unitario = models.DecimalField(max_digits=8, decimal_places=2)
+
+    def subtotal(self):
+        return self.quantidade * self.preco_unitario
+
+    def __str__(self):
+        return f"{self.quantidade}x {self.perfume.nome} (Pedido #{self.pedido.id})"
