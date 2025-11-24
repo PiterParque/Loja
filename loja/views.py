@@ -1,7 +1,6 @@
 from django.shortcuts import render,redirect
 from .models import Produto,Categoria,Usuario
 
-
 # Create your views here.
 def index(request):
     produtos=Produto.objects.filter(ativo=True).order_by('-data_cadastro')
@@ -99,4 +98,33 @@ def criar_usuario(request):
     if user :
         if user.tipo_usuario != "Admisnitrador":
             redirect('perfil')
-    return render(request,"./loja/static/html/administrador/usuario_criar.html")
+    usuario_criado=None
+    if request.method == "POST":
+        nome=request.POST.get("entrada_nome")
+        cpf=request.POST.get("entrada_cpf")
+        data_nascimento=request.POST.get("entrada_nascimento")
+        senha=request.POST.get("entrada_senha")
+        telefone=request.POST.get("entrada_telefone")
+        genero = request.POST.get("genero")
+        if genero == "OUTRO":
+            genero = request.POST.get("entrada_outro_genero")
+        tipo_usuario=request.POST.get("tipo_de_usuario")
+        try:
+  
+            usuario_novo=Usuario.objects.create(
+                nome=nome,
+                senha=senha,
+                CPF=cpf,
+                data_nascimento=data_nascimento,
+                telefone=telefone,
+                genero=genero,
+                tipo_usuario=tipo_usuario
+            )
+            usuario_novo.save()
+            usuario_criado="Usuario criado com sucesso"
+        except Exception as e:
+            print("Erro ao criar usuário:", e)
+            usuario_criado="Erro ao criar o usuario"
+        
+
+    return render(request,"./loja/static/html/administrador/usuario_criar.html",{'usuario_criado':usuario_criado})

@@ -45,11 +45,12 @@ class Usuario(models.Model):
     nome=models.CharField(max_length=30)
     senha= models.CharField(max_length=128) 
     CPF=models.CharField(max_length=15)
-    data_nascimento=models.DateTimeField(null=True)
+    data_nascimento=models.DateField(null=True, blank=True)
     telefone=models.CharField(max_length=15)
     genero=models.CharField(max_length=15)
     email = models.EmailField(max_length=254, unique=False)
     tipo_usuario=models.CharField(max_length=200,default="Comum")
+    ativo=models.BooleanField(default=True)
     def __str__(self):
         return f"{self.nome} <{self.email}>"
 class enderecos(models.Model):
