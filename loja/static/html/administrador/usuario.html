@@ -58,7 +58,15 @@
         <input type="text" name="outro_genero" id="outro_genero">
     </p>
     {% endif %}
+  <div style="display: flex; flex-direction: row;">
+     <p>ATIVO</p>
 
+      <p>SIM<input type="radio" name="ativo" value="ativo" {%if usuario.ativo%} checked {%endif%}></p>
+
+      <p>NÂO<input type="radio" name="desativado" id="desativado" {%if  not usuario.ativo%} checked {%endif%}></p>
+      </div>
+
+     
         
 
    <p>
@@ -68,7 +76,7 @@
     </div>
     <div class="botoes_usuario">
        <button type="button">SALVAR</button>
-       <button type="button">DESABILITAR</button>
+       
        </form>
     </div>
     
