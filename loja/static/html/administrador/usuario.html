@@ -22,8 +22,49 @@
     <p>TELEFONE:<input type="text" name="usuario_telefone" id="usuario_telefone" value="{{usuario.telefone}}"></p>
     </div>
     <div>
-    <p>GENERO:<input type="text" name="usuario_nome" id="usuario_nome" value="{{usuario.genero}}"></p>
-    <p>TIPO DE USUARIO:<input type="text" name="usuario_nome" id="usuario_nome" value="{{usuario.tipo_usuario}}"></p>
+    <p>GENERO: 
+
+    {% if usuario.genero == "	Masculino" %}
+    <select name="genero" id="genero">
+    <option value="MASCULINO" {% if usuario.genero == "	Masculino" %}selected{% endif %}>MASCULINO</option>
+    <option value="FEMININO" {% if usuario.genero == "Feminino" %}selected{% endif %}>FEMININO</option>
+    <option value="OUTRO" {% if usuario.genero == "OUTRO" %}selected{% endif %}>OUTRO</option>
+     </select>
+         <p id="campo_outro_genero" style="display:none;">
+        Informe seu gênero: 
+        <input type="text" name="outro_genero" id="outro_genero">
+    </p>
+
+    {%elif usuario.genero == "Feminino"%}
+    <select name="genero" id="genero">
+    <option value="MASCULINO" {% if usuario.genero == "	Masculino" %}selected{% endif %}>MASCULINO</option>
+    <option value="FEMININO" {% if usuario.genero == "Feminino" %}selected{% endif %}>FEMININO</option>
+    <option value="OUTRO" {% if usuario.genero == "OUTRO" %}selected{% endif %}>OUTRO</option>
+     </select>
+         <p id="campo_outro_genero" style="display:none;">
+        Informe seu gênero: 
+        <input type="text" name="outro_genero" id="outro_genero">
+    </p>
+
+    {%else%}
+    <select name="genero" id="genero">
+    <option value="MASCULINO" {% if usuario.genero == "	Masculino" %}selected{% endif %}>MASCULINO</option>
+    <option value="FEMININO" {% if usuario.genero == "Feminino" %}selected{% endif %}>FEMININO</option>
+    <option value="OUTRO" {% if usuario.genero == "OUTRO" %}selected{% endif %}>OUTRO</option>
+    <option  {% if usuario.genero == usuario.genero %}selected{% endif %}>{{usuario.genero}}</option>
+     </select>
+    <p id="campo_outro_genero" style="display:none;">
+        Informe seu gênero: 
+        <input type="text" name="outro_genero" id="outro_genero">
+    </p>
+    {% endif %}
+
+        
+
+   <p>
+    TIPO DE USUARIO:
+    <input type="text" name="usuario_nome" id="usuario_nome" value="{{ usuario.tipo_usuario }}">
+</p>
     </div>
     <div class="botoes_usuario">
        <button type="button">SALVAR</button>
@@ -38,4 +79,16 @@
  {% endif %}
 
 </div>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    // ---- Mostrar campo "outro gênero" ----
+    const selectGenero = document.getElementById("genero");
+    const campoOutro = document.getElementById("campo_outro_genero");
+
+    selectGenero.addEventListener("change", function () {
+        campoOutro.style.display = (this.value === "OUTRO") ? "block" : "none";
+    });
+  });
+</script>
 {% endblock  %}
