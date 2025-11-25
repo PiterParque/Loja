@@ -85,7 +85,7 @@ def usaurios(request):
     for i,_usuario in enumerate(_usuarios):
         if isinstance(_usuario['data_nascimento'], date):
             ano,mes,dia=str(_usuarios[i]['data_nascimento']).split('-')
-            _usuarios[i]['data_nascimento']=dia+"-"+mes+"-"+ano
+            _usuarios[i]['data_nascimento']=dia+"/"+mes+"/"+ano
       
 
 
@@ -96,7 +96,8 @@ def usuario(request,id):
     user=Usuario.objects.filter(id=usuario_id).values()
     user=user[0]
     if isinstance(user['data_nascimento'], date):
-     ano,mes,dia=str(user['data_nascimento']).split('-')
+     print(user['data_nascimento'])
+     ano,mes,dia=str(user['data_nascimento']).split('')
      user['data_nascimento']=dia+"-"+mes+"-"+ano
     usuario_alterado=False
     mensagem="Falha em alterar o usuario"
@@ -114,8 +115,10 @@ def usuario(request,id):
         if genero == "OUTRO":
             genero = request.POST.get("outro_genero")
         tipo_usuario=request.POST.get("usuario_tipo")
-        ano,mes,dia=str(data_nascimento).split('-')
-        data_nascimento=ano+"-"+mes+"-"+dia
+        if isinstance(data_nascimento, date):
+                ano,mes,dia=str(data_nascimento).split('-')
+                data_nascimento=ano+"-"+mes+"-"+dia
+
         try:
             x=Usuario.objects.filter(id=id).update(
                 nome=nome,

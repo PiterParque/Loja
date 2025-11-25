@@ -8,7 +8,7 @@
 <div class="usuario">
  {% if usuario %}
    <div class="perfil_usuario">
-  {%if usuario_alterado != true%}
+  {%if usuario_alterado == False%}
     <form action="" method="POST">
        {% csrf_token %}
     <button type="button" class="foto">
