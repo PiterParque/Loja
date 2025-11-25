@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect
 from .models import Produto,Categoria,Usuario
+from datetime import datetime,date
 
 # Create your views here.
 def index(request):
@@ -79,19 +80,60 @@ def usaurios(request):
     if user :
         if user.tipo_usuario != "Admisnitrador":
             redirect('perfil')
-    _usuarios=Usuario.objects.all().values()
+    _usuarios=Usuario.objects.all()
+    _usuarios=_usuarios.values()
+    for i,_usuario in enumerate(_usuarios):
+        if isinstance(_usuario['data_nascimento'], date):
+            ano,mes,dia=str(_usuarios[i]['data_nascimento']).split('-')
+            _usuarios[i]['data_nascimento']=dia+"-"+mes+"-"+ano
+      
+
+
+    
     return render(request,"./loja/static/html/administrador/usuarios.html",{'usuarios':_usuarios})
 def usuario(request,id):
     usuario_id = request.session.get('usuario_id')
-    user=Usuario.objects.filter(id=usuario_id).first()
+    user=Usuario.objects.filter(id=usuario_id).values()
+    user=user[0]
+    if isinstance(user['data_nascimento'], date):
+     ano,mes,dia=str(user['data_nascimento']).split('-')
+     user['data_nascimento']=dia+"-"+mes+"-"+ano
+    usuario_alterado=False
+    mensagem="Falha em alterar o usuario"
     if user :
-        if user.tipo_usuario != "Admisnitrador":
+        if user['tipo_usuario'] != "Admisnitrador":
             redirect('perfil')
     if id:
         _usuario=Usuario.objects.filter(id=id).first()
+    if request.method == "POST":
+        nome=request.POST.get("usuario_nome")
+        cpf=request.POST.get("usuario_cpf")
+        data_nascimento=request.POST.get("usuario_nascimento")
+        telefone=request.POST.get("usuario_telefone")
+        genero = request.POST.get("genero")
+        if genero == "OUTRO":
+            genero = request.POST.get("outro_genero")
+        tipo_usuario=request.POST.get("usuario_tipo")
+        ano,mes,dia=str(data_nascimento).split('-')
+        data_nascimento=ano+"-"+mes+"-"+dia
+        try:
+            x=Usuario.objects.filter(id=id).update(
+                nome=nome,
+                CPF=cpf,
+                data_nascimento=data_nascimento,
+                telefone=telefone,
+                genero=genero,
+                tipo_usuario=tipo_usuario
+            )
+            
+            usuario_alterado=True
+            mensagem="Usuario Alterado com Sucesso"
+        except Exception as e:
+            print("Erro:",e)
+
         
 
-    return render(request,"./loja/static/html/administrador/usuario.html",{'usuario':_usuario})
+    return render(request,"./loja/static/html/administrador/usuario.html",{'usuario':_usuario,'usuario_alterado':usuario_alterado,"mensagem":mensagem})
 def criar_usuario(request):
     usuario_id = request.session.get('usuario_id')
     user=Usuario.objects.filter(id=usuario_id).first()

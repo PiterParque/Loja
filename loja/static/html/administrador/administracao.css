@@ -157,7 +157,25 @@ padding-left: 5px;
   width: fit-content;
   font-size: large;
 }
+.ativo{
+ padding: 0;
+ margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 
+}
+.ativo input{
+ width: 50%;
+}
+.ativo p {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  height: fit-content;
+   padding: 0;
+ margin: 0;
+}
 @media (max-width: 800px) {
  body{
   display: flex;

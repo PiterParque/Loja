@@ -8,7 +8,9 @@
 <div class="usuario">
  {% if usuario %}
    <div class="perfil_usuario">
-    <form action="" method="post">
+  {%if usuario_alterado != true%}
+    <form action="" method="POST">
+       {% csrf_token %}
     <button type="button" class="foto">
       <i class="fa-solid fa-camera"></i>
       <img src="{% static 'imagens/usuario_sem_foto.png' %}" alt="" class="foto_usuario">
@@ -18,7 +20,7 @@
     <p>CPF:<input type="text" name="usuario_cpf" id="usuario_cpf" value="{{usuario.CPF}}"></p>
     </div>
     <div>
-    <p>DATA DE NASCIMENTO:<input type="text" name="usuario_nascimento" id="usuario_nascimento" value="{{usuario.data_nascimento}}"></p>
+    <p>DATA DE NASCIMENTO:<input type="date" name="usuario_nascimento" id="usuario_nascimento" value="{{usuario.data_nascimento |date:'Y-m-d'}}"></p>
     <p>TELEFONE:<input type="text" name="usuario_telefone" id="usuario_telefone" value="{{usuario.telefone}}"></p>
     </div>
     <div>
@@ -46,7 +48,7 @@
         <input type="text" name="outro_genero" id="outro_genero">
     </p>
 
-    {%else%}
+  {%else%}
     <select name="genero" id="genero">
     <option value="MASCULINO" {% if usuario.genero == "	Masculino" %}selected{% endif %}>MASCULINO</option>
     <option value="FEMININO" {% if usuario.genero == "Feminino" %}selected{% endif %}>FEMININO</option>
@@ -57,9 +59,10 @@
         Informe seu gênero: 
         <input type="text" name="outro_genero" id="outro_genero">
     </p>
-    {% endif %}
-  <div style="display: flex; flex-direction: row;">
-     <p>ATIVO</p>
+   {% endif %}
+  <div class="ativo">
+
+     <p>ATIVO:</p>
 
       <p>SIM<input type="radio" name="ativo" value="ativo" {%if usuario.ativo%} checked {%endif%}></p>
 
@@ -67,17 +70,19 @@
       </div>
 
      
-        
-
    <p>
     TIPO DE USUARIO:
-    <input type="text" name="usuario_nome" id="usuario_nome" value="{{ usuario.tipo_usuario }}">
+    <input type="text" name="usuario_tipo" id="usuario_tipo" value="{{ usuario.tipo_usuario }}">
 </p>
     </div>
     <div class="botoes_usuario">
-       <button type="button">SALVAR</button>
-       
+       <button type="submit">SALVAR</button>
+       <button type="button"><a>ALTERAR SENHA</a></button>
        </form>
+      {%else%}
+          <h1>{{mensagem}}</h1>
+
+      {%endif%}
     </div>
     
 

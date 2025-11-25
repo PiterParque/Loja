@@ -41,7 +41,7 @@
     <td><p><a class="atributo_usuario"  href="{% url "usuario" usuario.id %}">{{usuario.genero}}</a></p></td>
     <td><p><a class="atributo_usuario"  href="{% url "usuario" usuario.id %}">{{usuario.email}}</a></p></td>
     <td><p><a class="atributo_usuario" href="{% url "usuario" usuario.id %}">{{usuario.tipo_usuario}}</a></p></td>
-    <td><p><a class="atributo_usuario" href="{% url "usuario" usuario.id %}">{% if usuario.ativo %}SIM{%else%}Não{%endif%}</a></p></td>
+    <td><p><a class="atributo_usuario" href="{% url "usuario" usuario.id %}">{% if usuario.ativo == True %}SIM{%else%}Não{%endif%}</a></p></td>
     </tr>
    {% endfor %}
 
