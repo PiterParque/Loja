@@ -11,10 +11,15 @@
   {%if usuario_alterado == False%}
     <form action="" method="POST">
        {% csrf_token %}
-    <button type="button" class="foto">
-      <i class="fa-solid fa-camera"></i>
-      <img src="{% static 'imagens/usuario_sem_foto.png' %}" alt="" class="foto_usuario">
+    <button type="button" class="foto" onclick="document.getElementById('imagem_usuario').click()">
+        <i class="fa-solid fa-camera"></i>
+        {%if usuario.imagem_usuario%}
+        <img src="{% static usuario.imagem_usuario %}" alt="" class="foto_usuario" id="preview_foto">
+        {%else%}
+        <img src="{% static 'imagens/usuario_sem_foto.png' %}" alt="" class="foto_usuario" id="preview_foto">
+        {%endif%}
     </button>
+    <input type="file" name="imagem_usuario" id="imagem_usuario" accept="image/*" hidden>
     <div>
     <p>NOME: <input type="text" name="usuario_nome" id="usuario_nome" value="{{usuario.nome}}"></p>
     <p>CPF:<input type="text" name="usuario_cpf" id="usuario_cpf" value="{{usuario.CPF}}"></p>
@@ -103,5 +108,9 @@ document.addEventListener("DOMContentLoaded", function () {
         campoOutro.style.display = (this.value === "OUTRO") ? "block" : "none";
     });
   });
+document.getElementById("imagem_usuario").addEventListener("change", function (event) {
+    let img = document.getElementById("preview_foto");
+    img.src = URL.createObjectURL(event.target.files[0]); // muda a foto no front
+});
 </script>
 {% endblock  %}

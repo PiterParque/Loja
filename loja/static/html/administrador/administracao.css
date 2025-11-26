@@ -134,16 +134,18 @@ padding-left: 5px;
 }
 .foto i{
   width: 10px;
-  height: 10px;
+  height: 20px;
   position: absolute;
   top: 90%; /* distancia do topo da imagem */
-  right: 45%;
+  right: 50%;
 
 }
 .foto,img ,i{
-   border-radius: 130px; 
-     align-content: center;
+  border-radius: 130px; 
+  align-content: center;
   justify-content: center;
+  max-width: 200px;
+
 }
 .BUTTON_CRIAR_USAURIOS{
   font-size: large;

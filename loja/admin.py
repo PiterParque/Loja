@@ -16,4 +16,4 @@ class CategoriaAdmin(admin.ModelAdmin):
 
 @admin.register(Usuario)
 class UsuarioAdmin(admin.ModelAdmin):
-    list_display = ('nome','senha','CPF','data_nascimento','telefone','genero','email','tipo_usuario')
+    list_display = ('nome','senha','CPF','data_nascimento','telefone','genero','email','tipo_usuario','imagem_usuario')

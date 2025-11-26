@@ -42,6 +42,12 @@ class Produto(models.Model):
     def __str__(self):
         return self.nome
 class Usuario(models.Model):
+    imagem_usuario = models.ImageField(
+    upload_to='usuarios/',
+    null=True,
+    blank=True
+)
+
     nome=models.CharField(max_length=30)
     senha= models.CharField(max_length=128) 
     CPF=models.CharField(max_length=15)

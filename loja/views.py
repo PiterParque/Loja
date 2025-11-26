@@ -23,7 +23,9 @@ def logon_validation(request):
         user= Usuario.objects.filter(nome=username, senha=password).first()
         if user :
             if user.tipo_usuario == "Admisnitrador":
+                request.session['usuario_id'] = user.id
                 return redirect('administracao')
+   
             request.session['usuario_id'] = user.id
             return redirect('perfil')
         else:
@@ -73,6 +75,7 @@ def autenticacao(request):
     return render(request,'./loja/static/html/perfil/autenticação.html')
 #------------------
 def administracao(request):
+
     return render(request,"./loja/static/html/administrador/administracao.html")
 def usaurios(request):
     usuario_id = request.session.get('usuario_id')
@@ -92,48 +95,61 @@ def usaurios(request):
     
     return render(request,"./loja/static/html/administrador/usuarios.html",{'usuarios':_usuarios})
 def usuario(request,id):
-    usuario_id = request.session.get('usuario_id')
-    user=Usuario.objects.filter(id=usuario_id).values()
-    user=user[0]
-    if isinstance(user['data_nascimento'], date):
-     print(user['data_nascimento'])
-     ano,mes,dia=str(user['data_nascimento']).split('')
-     user['data_nascimento']=dia+"-"+mes+"-"+ano
+    _usuario=False
     usuario_alterado=False
-    mensagem="Falha em alterar o usuario"
-    if user :
-        if user['tipo_usuario'] != "Admisnitrador":
-            redirect('perfil')
-    if id:
-        _usuario=Usuario.objects.filter(id=id).first()
-    if request.method == "POST":
-        nome=request.POST.get("usuario_nome")
-        cpf=request.POST.get("usuario_cpf")
-        data_nascimento=request.POST.get("usuario_nascimento")
-        telefone=request.POST.get("usuario_telefone")
-        genero = request.POST.get("genero")
-        if genero == "OUTRO":
-            genero = request.POST.get("outro_genero")
-        tipo_usuario=request.POST.get("usuario_tipo")
-        if isinstance(data_nascimento, date):
-                ano,mes,dia=str(data_nascimento).split('-')
-                data_nascimento=ano+"-"+mes+"-"+dia
+    mensagem=''
+    try:
+        usuario_id = request.session.get('usuario_id')
+        user=Usuario.objects.filter(id=usuario_id).values()
+       
+        if user:
+            if user[0]['tipo_usuario'] != "Administrador":
+                redirect('perfil')
+        user=Usuario.objects.filter(id=id).values()
+        user=user[0]
+        if isinstance(user['data_nascimento'], date):
+            print(user['data_nascimento'])
+            ano,mes,dia=str(user['data_nascimento'].strftime("%d/%m/%Y")).split("/")
+            user['data_nascimento']=dia+"-"+mes+"-"+ano
+        usuario_alterado=False
+        mensagem="Falha em alterar o usuario"
+        if user :
+            if user['tipo_usuario'] != "Admisnitrador":
+                redirect('perfil')
+        if id:
+            _usuario=Usuario.objects.filter(id=id).first()
+        if request.method == "POST":
+            imagem = request.FILES.get("imagem_usuario")
+            nome=request.POST.get("usuario_nome")
+            cpf=request.POST.get("usuario_cpf")
+            data_nascimento=request.POST.get("usuario_nascimento")
+            telefone=request.POST.get("usuario_telefone")
+            genero = request.POST.get("genero")
+            if genero == "OUTRO":
+                genero = request.POST.get("outro_genero")
+            tipo_usuario=request.POST.get("usuario_tipo")
+            if isinstance(data_nascimento, date):
+                    ano,mes,dia=str(data_nascimento).split('-')
+                    data_nascimento=ano+"-"+mes+"-"+dia
 
-        try:
-            x=Usuario.objects.filter(id=id).update(
-                nome=nome,
-                CPF=cpf,
-                data_nascimento=data_nascimento,
-                telefone=telefone,
-                genero=genero,
-                tipo_usuario=tipo_usuario
-            )
-            
-            usuario_alterado=True
-            mensagem="Usuario Alterado com Sucesso"
-        except Exception as e:
-            print("Erro:",e)
-
+            try:
+          
+                x=Usuario.objects.filter(id=id).update(
+                    nome=nome,
+                    CPF=cpf,
+                    data_nascimento=data_nascimento,
+                    telefone=telefone,
+                    genero=genero,
+                    tipo_usuario=tipo_usuario,
+                    imagem_usuario=imagem 
+                )
+                
+                usuario_alterado=True
+                mensagem="Usuario Alterado com Sucesso"
+            except Exception as e:
+                print("Erro:",e)
+    except Exception as e :
+        print("Erro:",e)
         
 
     return render(request,"./loja/static/html/administrador/usuario.html",{'usuario':_usuario,'usuario_alterado':usuario_alterado,"mensagem":mensagem})
