@@ -27,8 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-MEDIA_URL = '/imagens/'
-MEDIA_ROOT = BASE_DIR / '.loja/static/imagens/'
+MEDIA_URL = '/'
+MEDIA_ROOT = BASE_DIR / '.loja/static/'
 
 
 # Application definition
@@ -120,9 +120,8 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR,'./.loja/static/imagens/'),
-    os.path.join(BASE_DIR,'./loja/static'),
-    os.path.join(BASE_DIR,'./loja/static/html')
+
+     BASE_DIR / 'loja/static',
     
 ]
 

@@ -22,7 +22,7 @@ def logon_validation(request):
         password=request.POST.get("password")
         user= Usuario.objects.filter(nome=username, senha=password).first()
         if user :
-            if user.tipo_usuario == "Admisnitrador":
+            if user.tipo_usuario == "Administrador":
                 request.session['usuario_id'] = user.id
                 return redirect('administracao')
    
@@ -118,35 +118,41 @@ def usuario(request,id):
                 redirect('perfil')
         if id:
             _usuario=Usuario.objects.filter(id=id).first()
-        if request.method == "POST":
-            imagem = request.FILES.get("imagem_usuario")
-            nome=request.POST.get("usuario_nome")
-            cpf=request.POST.get("usuario_cpf")
-            data_nascimento=request.POST.get("usuario_nascimento")
-            telefone=request.POST.get("usuario_telefone")
-            genero = request.POST.get("genero")
-            if genero == "OUTRO":
-                genero = request.POST.get("outro_genero")
-            tipo_usuario=request.POST.get("usuario_tipo")
-            if isinstance(data_nascimento, date):
-                    ano,mes,dia=str(data_nascimento).split('-')
-                    data_nascimento=ano+"-"+mes+"-"+dia
+        try:
+           if request.method == "POST":
+            
+                    usuario_obj = Usuario.objects.get(id=id)
 
-            try:
+                    imagem = request.FILES.get("imagem_usuario")
+                    nome = request.POST.get("usuario_nome")
+                    cpf = request.POST.get("usuario_cpf")
+                    data_nascimento = request.POST.get("usuario_nascimento")
+                    telefone = request.POST.get("usuario_telefone")
+                    genero = request.POST.get("genero")
+                    if genero == "OUTRO":
+                        genero = request.POST.get("outro_genero")
+
+                    tipo_usuario = request.POST.get("usuario_tipo")
+
+                    usuario_obj.nome = nome
+                    usuario_obj.CPF = cpf
+                    usuario_obj.data_nascimento = data_nascimento
+                    usuario_obj.telefone = telefone
+                    usuario_obj.genero = genero
+                    usuario_obj.tipo_usuario = tipo_usuario
+
+                    if imagem:
+                        usuario_obj.imagem_usuario = imagem
+
+                    usuario_obj.save()
+
+                    usuario_alterado = True
+                    mensagem = "Usuário alterado com sucesso"
+
+        
           
-                x=Usuario.objects.filter(id=id).update(
-                    nome=nome,
-                    CPF=cpf,
-                    data_nascimento=data_nascimento,
-                    telefone=telefone,
-                    genero=genero,
-                    tipo_usuario=tipo_usuario,
-                    imagem_usuario=imagem 
-                )
                 
-                usuario_alterado=True
-                mensagem="Usuario Alterado com Sucesso"
-            except Exception as e:
+        except Exception as e:
                 print("Erro:",e)
     except Exception as e :
         print("Erro:",e)
