@@ -129,6 +129,7 @@ padding-left: 5px;
   padding: 0;
   position: relative;  /* permite posicionar elementos dentro */
   display: inline-block;
+ 
 
    
 }
@@ -146,6 +147,7 @@ padding-left: 5px;
   justify-content: center;
   max-width: 300px;
   max-height: 300px;
+   object-fit: contain; 
 
 }
 .BUTTON_CRIAR_USAURIOS{
@@ -179,6 +181,45 @@ padding-left: 5px;
    padding: 0;
  margin: 0;
 }
+.alterar_senha{
+  font-size: large;
+  background-color: black;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  display: flex;
+
+}
+.alterar_senha p{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+    align-items: center;
+  justify-items: center;
+}
+.alterar_senha form {
+  padding: 5px ;
+  background-color: black;
+  align-items: center;
+  justify-items: center;
+    width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+    align-items: center;
+  justify-items: center;
+ 
+}
+.alterar_senha input{
+  font-size: large;
+  border-radius: 20px;
+}
+.botao_alterar_senha{
+    font-size: large;
+  border-radius: 20px;
+}
+.botoes_usuario{}
 @media (max-width: 800px) {
  body{
   display: flex;

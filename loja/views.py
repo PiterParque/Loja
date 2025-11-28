@@ -206,3 +206,21 @@ def criar_usuario(request):
         
 
     return render(request,"./loja/static/html/administrador/usuario_criar.html",{'usuario_criado':usuario_criado})
+def alterar_senha(request,id):
+    usuario_id = request.session.get('usuario_id')
+    user=Usuario.objects.filter(id=usuario_id).first()
+    if user :
+        if user.tipo_usuario != "Admisnitrador":
+            redirect('perfil')
+    senha_alterada=None
+    usuario_senha=None
+    try:
+       usuario_senha=Usuario.objects.filter(id=id).first()
+       if request.method == "POST":
+           senha= request.POST.get("senha")
+           usuario_senha.senha=senha
+           usuario_senha.save()
+           senha_alterada="Senha Alterada com Sucesso"
+    except Exception as e:
+        print("Erro:",e)
+    return render(request,"./loja/static/html/administrador/alterar_senha.html",{'senha_alterada':senha_alterada,"usuario":usuario_senha})
