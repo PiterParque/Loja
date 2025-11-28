@@ -25,7 +25,6 @@
 
         {% if usuario.imagem_usuario %}
             <img src="{{ usuario.imagem_usuario.url }}" alt="Foto" id="preview_foto" class="foto_usuario">
-            {{ usuario.imagem_usuario.url }}
         {% else %}
             <img src="{% static 'imagens/usuario_sem_foto.png' %}" alt="Sem foto" id="preview_foto" class="foto_usuario">
         {% endif %}

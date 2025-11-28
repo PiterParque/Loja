@@ -166,32 +166,43 @@ def criar_usuario(request):
         if user.tipo_usuario != "Admisnitrador":
             redirect('perfil')
     usuario_criado=None
-    if request.method == "POST":
-        nome=request.POST.get("entrada_nome")
-        cpf=request.POST.get("entrada_cpf")
-        data_nascimento=request.POST.get("entrada_nascimento")
-        senha=request.POST.get("entrada_senha")
-        telefone=request.POST.get("entrada_telefone")
-        genero = request.POST.get("genero")
-        if genero == "OUTRO":
-            genero = request.POST.get("entrada_outro_genero")
-        tipo_usuario=request.POST.get("tipo_de_usuario")
-        try:
-  
-            usuario_novo=Usuario.objects.create(
-                nome=nome,
-                senha=senha,
-                CPF=cpf,
-                data_nascimento=data_nascimento,
-                telefone=telefone,
-                genero=genero,
-                tipo_usuario=tipo_usuario
-            )
-            usuario_novo.save()
-            usuario_criado="Usuario criado com sucesso"
-        except Exception as e:
-            print("Erro ao criar usuário:", e)
-            usuario_criado="Erro ao criar o usuario"
+ 
+    try:
+           if request.method == "POST":
+            
+                    usuario_obj = Usuario.objects.create()
+
+                    imagem = request.FILES.get("imagem_usuario")
+                    nome = request.POST.get("entrada_nome")
+                    senha=request.POST.get("entrada_senha")
+                    cpf = request.POST.get("entrada_cpf")
+                    data_nascimento = request.POST.get("entrada_nascimento")
+                    telefone = request.POST.get("entrada_telefone")
+                    genero = request.POST.get("genero")
+                    if genero == "OUTRO":
+                        genero = request.POST.get("campo_outro_genero")
+
+                    tipo_usuario = request.POST.get("tipo_de_usuario")
+
+                    usuario_obj.nome = nome
+                    usuario_obj.senha = senha
+                    usuario_obj.CPF = cpf
+                    usuario_obj.data_nascimento = data_nascimento
+                    usuario_obj.telefone = telefone
+                    usuario_obj.genero = genero
+                    usuario_obj.tipo_usuario = tipo_usuario
+
+                    if imagem:
+                        usuario_obj.imagem_usuario = imagem
+
+                    usuario_obj.save()
+
+                    usuario_alterado = True
+                    mensagem = "Usuário alterado com sucesso"
+
+        
+    except Exception as e:
+                print("Erro:",e)
         
 
     return render(request,"./loja/static/html/administrador/usuario_criar.html",{'usuario_criado':usuario_criado})
