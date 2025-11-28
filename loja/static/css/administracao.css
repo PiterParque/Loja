@@ -5,6 +5,11 @@ body{
     background-color: rgb(28, 28, 28);
     height: 100%;
     width: 100%; 
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    
+    
     
 }
 .Titulo{
@@ -15,6 +20,8 @@ body{
    display: flex;
    height: 100%;
    width: 100%; 
+   background-color: #ac9d85;
+   
 
 }
 .menus_administracao{
@@ -219,7 +226,18 @@ padding-left: 5px;
     font-size: large;
   border-radius: 20px;
 }
-.botoes_usuario{}
+.rodape{
+  display: flex;
+  object-fit: cover;
+  justify-content: center;
+  align-content: center;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  border: #e5cca1 solid 0.5px;
+  border-radius: 5px;
+}
+
 @media (max-width: 800px) {
  body{
   display: flex;
