@@ -1,2 +1,66 @@
 {% extends './administracao.html' %}
 {% load static %}
+{% block conteudo%}
+<div >
+    
+      
+   
+    <ul class="gerenciamento_produtos">
+        <form action="" method="post" class="form_pesquisar_usuarios">
+        <select name="filtro" id="filtro">
+            <option value="NOME">NOME</option>
+            <option value="CPF">MARCA</option>
+</option>
+        </select>
+        <input type="search" name="pesquisar_usuarios" id="">
+        <button type="button" onclick="window.location.href='{% url 'usuario_criar' %}'" class="BUTTON_CRIAR_USAURIOS"><i class="fa-solid fa-user"></i>  CRIAR PRODUTO</button>
+
+        </form>
+        {% if produtos %}
+        {% for i in  produtos %}
+        <p>DEBUG: {{ i.imagem_principal }}</p>
+<p>DEBUG URL: {{ i.imagem_principal.url }}</p>
+
+        <li class="produtos_item_">
+                {% if i.imagem_principal %}
+                    <img src="{{i.imagem_principal.url }}" alt="">
+                {%else%}
+                  <img src="{% static 'imagens/perfumes_1.jpg' %}" alt="">
+                {% endif %}
+                
+                <div>
+                <p>NOME:{{i.nome}}</p>
+                <p>SKU:{{i.sku}}</p>
+                </div>
+                <div>
+                <p>MARCA:{{i.marca}}</p>
+                <p>CATEGORIA:{{i.categoria}}</p>
+                </div>
+                <div>
+                <p>PREÇO:{{i.preco}}</p>
+                <p>PREÇO PROMOCIONAL:{{i.preco_promocional}}</p>
+                </div>
+                <div>
+                <p>ESTOQUE:{{i.estoque}}</p>
+                <p>TAMANHO:{{i.tamanho}}</p>
+                </div>
+                <div>
+                <p>AVALIAÇÃO MEDIA:{{i.avaliacao_media}}</p>
+                <p>ATIVO:{% if i.ativo %}SIM{%else%}NÃO{% endif %}</p>
+                </div>
+                <div>
+                <p>DATA DE CADASTRO:{{i.data_cadastro}}</p>
+                <p>ML:{{i.ml}}</p>
+                </div>
+
+           
+        </li>
+       {% endfor %}
+
+        {%else%}
+                   <h1>NENHUM PRODUTO ENCOTRADO</h1>
+        {% endif %}
+    </ul>
+</div>
+
+{% endblock  %}

@@ -89,11 +89,13 @@ def usaurios(request):
         if isinstance(_usuario['data_nascimento'], date):
             ano,mes,dia=str(_usuarios[i]['data_nascimento']).split('-')
             _usuarios[i]['data_nascimento']=dia+"/"+mes+"/"+ano
+    quatidade_usuario=len(Usuario.objects.all().values())
+
       
 
 
     
-    return render(request,"./loja/static/html/administrador/usuarios.html",{'usuarios':_usuarios})
+    return render(request,"./loja/static/html/administrador/usuarios.html",{'usuarios':_usuarios,"quantidade_usuarios":quatidade_usuario})
 def usuario(request,id):
     _usuario=False
     usuario_alterado=False
@@ -224,3 +226,7 @@ def alterar_senha(request,id):
     except Exception as e:
         print("Erro:",e)
     return render(request,"./loja/static/html/administrador/alterar_senha.html",{'senha_alterada':senha_alterada,"usuario":usuario_senha})
+def produtos(request):
+    produtos_=Produto.objects.all().values()
+
+    return render(request,"./loja/static/html/administrador/produtos.html",{'produtos':produtos_})
