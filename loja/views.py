@@ -227,6 +227,19 @@ def alterar_senha(request,id):
         print("Erro:",e)
     return render(request,"./loja/static/html/administrador/alterar_senha.html",{'senha_alterada':senha_alterada,"usuario":usuario_senha})
 def produtos(request):
-    produtos_=Produto.objects.all().values()
+    produtos_=Produto.objects.all()
 
     return render(request,"./loja/static/html/administrador/produtos.html",{'produtos':produtos_})
+def produto_edit(request,id):
+    produto_=None
+    imagens=None
+    try:
+      produto_=Produto.objects.filter(id=id)
+      imagens=produto_[0].imagem_principal
+   
+
+    except Exception as e :
+        print("Erro:",e)
+   
+
+    return render(request,"./loja/static/html/administrador/produto_edit.html",{'produto':produto_.first(),"imagens":imagens})

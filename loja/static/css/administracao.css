@@ -291,11 +291,9 @@ padding-left: 5px;
   border: black solid 1px;
  display: flex;
  gap: 5px;
- color: #e5cca1;
- 
 }
 .produtos_item_ img{
-  object-fit: cover;
+
   width: 10%;
 }
 .produtos_item_ div{
@@ -310,6 +308,9 @@ padding-left: 5px;
   flex-direction: column;
   width: fit-content;
 }
-.produtos_item_ img{
-  width: 100%;
+.produtos_item_ a{
+   color: #e5cca1;
+}
+.produto_edit input{
+  color: #e5cca1;
 }

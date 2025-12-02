@@ -1,16 +1,13 @@
 {% extends './administracao.html' %}
 {% load static %}
 {% block conteudo%}
-<div >
-    
-      
-   
+<div>
     <ul class="gerenciamento_produtos">
         <form action="" method="post" class="form_pesquisar_usuarios">
         <select name="filtro" id="filtro">
             <option value="NOME">NOME</option>
             <option value="CPF">MARCA</option>
-</option>
+       </option>
         </select>
         <input type="search" name="pesquisar_usuarios" id="">
         <button type="button" onclick="window.location.href='{% url 'usuario_criar' %}'" class="BUTTON_CRIAR_USAURIOS"><i class="fa-solid fa-user"></i>  CRIAR PRODUTO</button>
@@ -18,39 +15,40 @@
         </form>
         {% if produtos %}
         {% for i in  produtos %}
-        <p>DEBUG: {{ i.imagem_principal }}</p>
-<p>DEBUG URL: {{ i.imagem_principal.url }}</p>
+
 
         <li class="produtos_item_">
+           
                 {% if i.imagem_principal %}
-                    <img src="{{i.imagem_principal.url }}" alt="">
+                    <img src="{{ i.imagem_principal.url }}" alt="">
+
                 {%else%}
                   <img src="{% static 'imagens/perfumes_1.jpg' %}" alt="">
                 {% endif %}
                 
                 <div>
-                <p>NOME:{{i.nome}}</p>
-                <p>SKU:{{i.sku}}</p>
+                <p><a href="{% url 'produto_editar' id=i.id %}">NOME:{{i.nome}}</a></p>
+                <p><a href="{% url 'produto_editar' id=i.id %}">SKU:{{i.sku}}</a></p>
                 </div>
                 <div>
-                <p>MARCA:{{i.marca}}</p>
-                <p>CATEGORIA:{{i.categoria}}</p>
+                <p><a href="{% url 'produto_editar' id=i.id %}">MARCA:{{i.marca}}</a></p>
+                <p><a href="{% url 'produto_editar' id=i.id %}">CATEGORIA:{{i.categoria}}</a></p>
                 </div>
                 <div>
-                <p>PREÇO:{{i.preco}}</p>
-                <p>PREÇO PROMOCIONAL:{{i.preco_promocional}}</p>
+                <p><a href="{% url 'produto_editar' id=i.id %}">PREÇO:{{i.preco}}</a></p>
+                <p><a href="{% url 'produto_editar' id=i.id %}">PREÇO PROMOCIONAL:{{i.preco_promocional}}</a></p>
                 </div>
                 <div>
-                <p>ESTOQUE:{{i.estoque}}</p>
-                <p>TAMANHO:{{i.tamanho}}</p>
+                <p><a href="{% url 'produto_editar' id=i.id %}">ESTOQUE:{{i.estoque}}</a></p>
+                <p><a href="{% url 'produto_editar' id=i.id %}">TAMANHO:{{i.tamanho}}</a></p>
                 </div>
                 <div>
-                <p>AVALIAÇÃO MEDIA:{{i.avaliacao_media}}</p>
-                <p>ATIVO:{% if i.ativo %}SIM{%else%}NÃO{% endif %}</p>
+                <p><a href="{% url 'produto_editar' id=i.id %}">AVALIAÇÃO MEDIA:{{i.avaliacao_media}}</a></p>
+                <p><a href="">ATIVO:{% if i.ativo %}SIM{%else%}NÃO{% endif %}</a></p>
                 </div>
                 <div>
-                <p>DATA DE CADASTRO:{{i.data_cadastro}}</p>
-                <p>ML:{{i.ml}}</p>
+                <p><a href="{% url 'produto_editar' id=i.id %}">DATA DE CADASTRO:{{i.data_cadastro}}</a></p>
+                <p><a href="{% url 'produto_editar' id=i.id %}">ML:{{i.ml}}</a></p>
                 </div>
 
            

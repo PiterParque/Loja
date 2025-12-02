@@ -59,7 +59,8 @@
                     {%for produto in produtos%}
                        <div class="produto-item">
                         {% if produto.imagem_principal %}
-                           <img src="{% static produto.imagem_principal %}" alt="Perfume {{ i }}">
+                           <img src="{{ produto.imagem_principal.url }}" alt="Perfume">
+                           
                         {%else%}
                           <img src="{% static 'imagens/perfumes_1.jpg' %}" alt="Perfume">
                         {% endif %}

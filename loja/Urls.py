@@ -1,5 +1,7 @@
 from django.urls import path
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns=[
     path('',views.index,name='index'),
@@ -18,4 +20,7 @@ urlpatterns=[
     path('administracao/usuario/criar',views.criar_usuario,name="usuario_criar"),
     path('administracao/usuario/alterar_senha/<int:id>',views.alterar_senha,name="alterar_senha"),
     path('administracao/produtos',views.produtos,name="produtos"),
+    path('administracao/produtos/editar/<int:id>',views.produto_edit,name="produto_editar"),
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

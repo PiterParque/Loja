@@ -1,0 +1,31 @@
+{% extends './administracao.html' %}
+{% load static %}
+{% block conteudo%}
+<div>
+   <div class="produto_edit">
+    {% if produto %}
+        {% if imagens %}
+            <img src="{{ imagens.url }}" alt="">
+        {%else%}
+            <img src="{% static 'imagens/perfumes_1.jpg' %}" alt="">
+        {% endif %}
+        <p>NOME: <input type="text" value="{{produto.nome}}"></p>
+        <p>SKU: <input type="text" value="{{produto.sku}}"></p>
+        <p>MARCA: <input type="text" value="{{produto.marca}}"></p>
+        <p>CATEGORIA <input type="text" value="{{produto.categoria}}"></p>
+        <p>ML <input type="text" value="{{produto.ml}}"></p>
+         <p>PREÇO: <input type="text" value="{{produto.preco}}"></p>
+         <p>ESTOQUE: <input type="text" value="{{produto.estoque}}"></p>
+         <p>TAMANHO: <input type="text" value="{{produto.tamanho}}"></p>
+         <p>AVALIAÇÃO MEDIA:{{produto.avaliacao_media}}</p>
+         <p>DATA DE CADASTRO:{{produto.data_cadastro}}</p>
+  
+    {%else%}
+     <h1>Produto não encotrado</h1>
+    {% endif %}
+
+
+   </div>
+</div>
+
+{% endblock  %}
