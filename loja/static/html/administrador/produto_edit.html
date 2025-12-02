@@ -3,23 +3,39 @@
 {% block conteudo%}
 <div>
    <div class="produto_edit">
+    <form action="" method="post">
     {% if produto %}
         {% if imagens %}
+        <div class="carrosel_imagens_produtos">
+            <div class="imagens_carrosel_produtos" id="imagens_carrosel_produtos">
             <img src="{{ imagens.url }}" alt="">
+            <img src="{{ imagens.url }}" alt="">
+            <img src="{{ imagens.url }}" alt="">
+            <img src="{{ imagens.url }}" alt="">
+            </div>
+            <button type="button" id="antes"><i class="fa-duotone fa-solid fa-arrow-down"></i></button>
+            <button type="button" id="depois" ><i class="fa-duotone fa-solid fa-arrow-down"></i></button>
+
+        </div>
+        <div class="adicionar_remover">
+        <button type="button"><i class="fa-solid fa-plus"></i></button>
+        <button type="button"   class="lixeira_"><img src="{% static 'imagens/lixeira.png' %}" alt=""></button>
+        </div>
         {%else%}
             <img src="{% static 'imagens/perfumes_1.jpg' %}" alt="">
         {% endif %}
         <p>NOME: <input type="text" value="{{produto.nome}}"></p>
         <p>SKU: <input type="text" value="{{produto.sku}}"></p>
         <p>MARCA: <input type="text" value="{{produto.marca}}"></p>
-        <p>CATEGORIA <input type="text" value="{{produto.categoria}}"></p>
-        <p>ML <input type="text" value="{{produto.ml}}"></p>
+        <p>CATEGORIA:<input type="text" value="{{produto.categoria}}"></p>
+        <p>ML: <input type="text" value="{{produto.ml}}"></p>
          <p>PREÇO: <input type="text" value="{{produto.preco}}"></p>
          <p>ESTOQUE: <input type="text" value="{{produto.estoque}}"></p>
          <p>TAMANHO: <input type="text" value="{{produto.tamanho}}"></p>
          <p>AVALIAÇÃO MEDIA:{{produto.avaliacao_media}}</p>
          <p>DATA DE CADASTRO:{{produto.data_cadastro}}</p>
-  
+         <button type="submit">SALVAR</button>
+     </form>
     {%else%}
      <h1>Produto não encotrado</h1>
     {% endif %}
@@ -27,5 +43,19 @@
 
    </div>
 </div>
+<script>
+const slides = document.getElementById('imagens_carrosel_produtos')
+const totalSlides= slides.children.length
+let index=0
+
+  document.getElementById('depois').addEventListener('click', () => {
+    index = (index + 1) % totalSlides;
+    slides.style.transform = `translateX(${-300 * index}px)`;
+  });
+  document.getElementById('antes').addEventListener('click', () => {
+    index = (index - 1 + totalSlides) % totalSlides;
+    slides.style.transform = `translateX(${-300 * index}px)`;
+  });
+</script>
 
 {% endblock  %}
