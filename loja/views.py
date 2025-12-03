@@ -227,9 +227,22 @@ def alterar_senha(request,id):
         print("Erro:",e)
     return render(request,"./loja/static/html/administrador/alterar_senha.html",{'senha_alterada':senha_alterada,"usuario":usuario_senha})
 def produtos(request):
-    produtos_=Produto.objects.all()
+    produtos_ = Produto.objects.all()
 
-    return render(request,"./loja/static/html/administrador/produtos.html",{'produtos':produtos_})
+    # Criar um dicionário com pelo menos uma imagem por produto
+    imagens_produtos = {}
+    for produto in produtos_:
+        imagens = ImagemProduto.objects.filter(produto=produto)
+        if imagens.exists():
+            imagens_produtos[produto.id] = imagens.first().imagem.url
+        else:
+            # imagem padrão
+            imagens_produtos[produto.id] = '/static/imagens/perfumes_1.jpg'
+
+    return render(request, "./loja/static/html/administrador/produtos.html", {
+        'produtos': produtos_,
+        'imagens_produtos': imagens_produtos
+    })
 def produto_edit(request,id):
     usuario_id = request.session.get('usuario_id')
     user=Usuario.objects.filter(id=usuario_id).first()
@@ -239,8 +252,13 @@ def produto_edit(request,id):
     produto_=None
     imagens=None
     try:
+      
       produto_=Produto.objects.filter(id=id)
-      imagens=produto_[0].imagem_principal
+      imagens=ImagemProduto.objects.filter(produto=id)
+      print(imagens.values())
+
+
+
    
 
     except Exception as e :
@@ -286,14 +304,6 @@ def criar_produto(request):
 
             # filtrar somente imagens válidas
             imagens_validas = [img for img in imagens if img is not None and img.size > 0]
-
-
-
-            # IMAGEM PRINCIPAL = primeira imagem enviada
-            imagem_principal = imagens_validas[0]
-
-            print("Imagem principal:", imagem_principal)
-
             # LOG (opcional para teste)
             print("Dados recebidos:")
             print(nome, sku, marca, categoria_id, ml, preco, estoque, tamanho)
@@ -307,7 +317,6 @@ def criar_produto(request):
                 preco=preco,
                 estoque=estoque,
                 tamanho=tamanho,
-                imagem_principal=imagem_principal,
             )
             produto.save()
             for img in imagens_validas:
@@ -319,7 +328,7 @@ def criar_produto(request):
 
 
 
-            #return redirect('lista_produtos')
+            return redirect('lista_produtos')
 
     except Exception as e:
         print("Erro:", e)

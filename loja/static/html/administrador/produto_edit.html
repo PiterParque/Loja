@@ -8,10 +8,9 @@
         {% if imagens %}
         <div class="carrosel_imagens_produtos">
             <div class="imagens_carrosel_produtos" id="imagens_carrosel_produtos">
-            <img src="{{ imagens.url }}" alt="">
-            <img src="{{ imagens.url }}" alt="">
-            <img src="{{ imagens.url }}" alt="">
-            <img src="{{ imagens.url }}" alt="">
+              {% for imagem in imagens %}
+            <img src="{{ imagem.imagem.url }}" alt="">
+               {% endfor %}
             </div>
             <button type="button" id="antes"><i class="fa-duotone fa-solid fa-arrow-down"></i></button>
             <button type="button" id="depois" ><i class="fa-duotone fa-solid fa-arrow-down"></i></button>

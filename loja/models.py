@@ -25,10 +25,6 @@ class Produto(models.Model):
     preco_promocional = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     estoque = models.PositiveIntegerField(default=0)
     sku = models.CharField(max_length=50, unique=True)
-
-    # CORRIGIDO: upload_to não deve começar com "./"
-    imagem_principal = models.ImageField(upload_to='produtos_imagens/', blank=True, null=True)
-
     tamanho = models.CharField(max_length=50, blank=True, null=True)
     avaliacao_media = models.DecimalField(max_digits=3, decimal_places=2, default=0)
     quantidade_avaliacoes = models.PositiveIntegerField(default=0)
