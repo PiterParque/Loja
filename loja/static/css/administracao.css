@@ -261,9 +261,9 @@ padding-left: 5px;
   width: 100%;
   position: fixed;
   bottom: 0;
-  border: #e5cca1 solid 0.5px;
+
   border-radius: 5px;
-  background-color: black;
+  background-color: rgb(0, 0, 0);
 }
 
 @media (max-width: 800px) {
@@ -391,4 +391,46 @@ padding-left: 5px;
 .adicionar_remover{
   display: flex;
   gap: 82%;
+}
+.adicionar_remover button{
+  border-radius: 10px;
+}
+.entrada-imagens{
+ display: flex;
+ flex-direction: column;
+}
+.entrada-imagens{
+  margin: 0;
+  padding: 0;
+  width: fit-content;
+  height: fit-content;
+}
+.formulario-criacao{
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(0, 0, 0);
+  padding: 0;
+  margin: 0;
+  justify-items: center;
+  align-items: center;
+}
+.formulario-criacao p {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+.formulario-criacao input, select{
+  border-radius: 20px;
+  margin: 0px 10px;
+}
+.entrada-dado-produto{
+  width: max-content;
+  padding-right:  8%;
+}
+.formulario-criacao button{
+  
+  border-radius: 20px;
+  color: #e5cca1;
+  background-color: #383127;
+  font-size: large;
 }

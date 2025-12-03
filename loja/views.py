@@ -231,6 +231,11 @@ def produtos(request):
 
     return render(request,"./loja/static/html/administrador/produtos.html",{'produtos':produtos_})
 def produto_edit(request,id):
+    usuario_id = request.session.get('usuario_id')
+    user=Usuario.objects.filter(id=usuario_id).first()
+    if user :
+        if user.tipo_usuario != "Admisnitrador":
+            redirect('perfil')
     produto_=None
     imagens=None
     try:
@@ -243,3 +248,50 @@ def produto_edit(request,id):
    
 
     return render(request,"./loja/static/html/administrador/produto_edit.html",{'produto':produto_.first(),"imagens":imagens})
+def criar_produto(request):
+    usuario_id = request.session.get('usuario_id')
+    user = Usuario.objects.filter(id=usuario_id).first()
+    categorias = None
+
+    # Verifica se usuário é administrador
+    if user:
+        if user.tipo_usuario != "Administrador":
+            return redirect('perfil')
+
+    try:
+        categorias = Categoria.objects.all()
+
+        # ---------------------- SE O FORM FOR ENVIADO ----------------------
+        if request.method == 'POST':
+
+            # -------- TEXTOS --------
+            nome = request.POST.get('nome')
+            sku = request.POST.get('sku')
+            marca = request.POST.get('marca')
+            categoria_id = request.POST.get('categoria')
+            ml = request.POST.get('ml')
+            preco = request.POST.get('preco')
+            estoque = request.POST.get('estoque')
+            tamanho = request.POST.get('tamanho')
+
+            # -------- IMAGENS --------
+            imagem_1 = request.FILES.get('imagem_1')
+            imagem_2 = request.FILES.get('imagem_2')
+            imagem_3 = request.FILES.get('imagem_3')
+            imagem_4 = request.FILES.get('imagem_4')
+            imagem_5 = request.FILES.get('imagem_5')
+
+            # LOG (opcional para teste)
+            print("Dados recebidos:")
+            print(nome, sku, marca, categoria_id, ml, preco, estoque, tamanho)
+            print("Imagens:", imagem_1, imagem_2, imagem_3, imagem_4, imagem_5)
+
+
+            # -------- SALVAR PRODUTO --------
+
+            return redirect('lista_produtos')
+
+    except Exception as e:
+        print("Erro:", e)
+
+    return render(request, "./loja/static/html/administrador/produto_criar.html", {"categorias": categorias})

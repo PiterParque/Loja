@@ -21,6 +21,7 @@ urlpatterns=[
     path('administracao/usuario/alterar_senha/<int:id>',views.alterar_senha,name="alterar_senha"),
     path('administracao/produtos',views.produtos,name="produtos"),
     path('administracao/produtos/editar/<int:id>',views.produto_edit,name="produto_editar"),
+    path('administracao/produtos/criar',views.criar_produto,name="produto_criar"),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
