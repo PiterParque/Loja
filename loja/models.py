@@ -52,7 +52,6 @@ class ImagemProduto(models.Model):
         related_name='imagens'
     )
     imagem = models.ImageField(upload_to='imagens/produtos/')
-    descricao = models.CharField(max_length=200, blank=True, null=True)
 
     def __str__(self):
         return f"Imagem de {self.produto.nome}"

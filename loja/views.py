@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from .models import Produto,Categoria,Usuario
+from .models import Produto,Categoria,Usuario,ImagemProduto
 from datetime import datetime,date
 
 # Create your views here.
@@ -274,22 +274,52 @@ def criar_produto(request):
             estoque = request.POST.get('estoque')
             tamanho = request.POST.get('tamanho')
 
-            # -------- IMAGENS --------
+           # -------- IMAGENS --------
             imagem_1 = request.FILES.get('imagem_1')
             imagem_2 = request.FILES.get('imagem_2')
             imagem_3 = request.FILES.get('imagem_3')
             imagem_4 = request.FILES.get('imagem_4')
             imagem_5 = request.FILES.get('imagem_5')
 
+            # lista com todas
+            imagens = [imagem_1, imagem_2, imagem_3, imagem_4, imagem_5]
+
+            # filtrar somente imagens válidas
+            imagens_validas = [img for img in imagens if img is not None and img.size > 0]
+
+
+
+            # IMAGEM PRINCIPAL = primeira imagem enviada
+            imagem_principal = imagens_validas[0]
+
+            print("Imagem principal:", imagem_principal)
+
             # LOG (opcional para teste)
             print("Dados recebidos:")
             print(nome, sku, marca, categoria_id, ml, preco, estoque, tamanho)
             print("Imagens:", imagem_1, imagem_2, imagem_3, imagem_4, imagem_5)
+            produto = Produto.objects.create(
+                nome=nome,
+                sku=sku,
+                marca=marca,
+                categoria_id=categoria_id,
+                ml=ml,
+                preco=preco,
+                estoque=estoque,
+                tamanho=tamanho,
+                imagem_principal=imagem_principal,
+            )
+            produto.save()
+            for img in imagens_validas:
+                    i=ImagemProduto.objects.create(
+                        produto=produto,
+                        imagem=img
+                    )
+                    i.save()
 
 
-            # -------- SALVAR PRODUTO --------
 
-            return redirect('lista_produtos')
+            #return redirect('lista_produtos')
 
     except Exception as e:
         print("Erro:", e)
