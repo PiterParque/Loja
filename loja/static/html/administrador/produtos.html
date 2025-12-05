@@ -16,9 +16,11 @@
         {% if produtos %}
        {% for i in produtos %}
         <li class="produtos_item_">
-           
-            <img src="{{ imagens_produtos.i.id }}" alt="{{ i.nome }}">
-
+            {% if i.imagem_principal %}
+            <img src="{{ i.imagem_principal.url }}" alt="{{ i.nome }}">
+              {% else %}
+              <img src="{% static 'imagens/perfumes_1.jpg' %}" alt="{{ i.nome }}">
+             {% endif %}
             <div>
                 <p><a href="{% url 'produto_editar' id=i.id %}">NOME: {{ i.nome }}</a></p>
                 <p><a href="{% url 'produto_editar' id=i.id %}">SKU: {{ i.sku }}</a></p>

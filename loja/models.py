@@ -1,6 +1,7 @@
 import os
 from django.db import models
 from django.utils.text import slugify
+from django.db.utils import IntegrityError
 
 
 # CAMINHO PARA AS IMAGENS DO PRODUTO (recomendado)
@@ -30,14 +31,18 @@ class Produto(models.Model):
     quantidade_avaliacoes = models.PositiveIntegerField(default=0)
     ativo = models.BooleanField(default=True)
     data_cadastro = models.DateTimeField(auto_now_add=True)
+    imagem_principal = models.ImageField(upload_to='produtos_imagens/', blank=True, null=True)
 
     slug = models.SlugField(unique=True)
     ml = models.CharField(max_length=5, default='0')
 
     def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.nome)
-        super().save(*args, **kwargs)
+        try:
+            if not self.slug:
+                self.slug = slugify(self.nome)
+            super().save(*args, **kwargs)
+        except  IntegrityError:
+            return "Nome ja existe ou ilegivel para cadasstro"
 
     def __str__(self):
         return self.nome

@@ -2,13 +2,15 @@
 {% load static %}
 {% block conteudo %}
 <div class="criar_produto">
-    
+    {% if retorno.sinal_retorno %}
     <form id="form-criar-produto" action="" method="post" class="formulario-criacao" enctype="multipart/form-data">
         {% csrf_token %}
         <h1>CRIAR PRODUTO</h1>
 
         <div class="entrada-imagens">
-            <input type="file" name="imagem_1" id="imagem_1">
+            <p class="texto_imagem">Imagem Principal</p>
+            <input type="file" name="imagem_1_principal" id="imagem_1_principal">
+            <p class="texto_imagem">Outras imagens</p>
             <input type="file" name="imagem_2" id="imagem_2">
             <input type="file" name="imagem_3" id="imagem_3">
             <input type="file" name="imagem_4" id="imagem_4">
@@ -64,6 +66,10 @@
         <button type="submit">CRIAR</button>
     </form>
 </div>
+{%else%}
+<h1>{{retorno.retorno}}</h1>
+
+{% endif %}
 
 <script>
 // ------------------ VALIDAÇÃO JAVASCRIPT ------------------
@@ -86,7 +92,7 @@ document.getElementById("form-criar-produto").addEventListener("submit", functio
     const tamanho = document.querySelector("input[name='tamanho']");
 
     const imagens = [
-        document.getElementById("imagem_1"),
+        document.getElementById("imagem_1_principal"),
         document.getElementById("imagem_2"),
         document.getElementById("imagem_3"),
         document.getElementById("imagem_4"),

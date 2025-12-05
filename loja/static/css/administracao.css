@@ -12,19 +12,16 @@ body{
     justify-items: center;
     
     
-    
 }
 .Titulo{
     font-size: 50px;
 }
 
 .principal{
-   display: flex;
-   height: 100%;
-   width: 100%; 
-   background-color: #ac9d85;
-   
-
+  display: flex;
+  padding: 0.2rem;
+  align-items: left;
+  width: 100%;
 }
 .menus_administracao{
     background-color: #ac9d85;
@@ -43,9 +40,7 @@ body{
 
 
 }
-.conteudo{
-  background-color: white;
-}
+
 .tabela{
   display: flex;
   flex-direction: column;
@@ -413,6 +408,8 @@ padding-left: 5px;
   margin: 0;
   justify-items: center;
   align-items: center;
+  border: none;
+  border-radius: 20px;
 }
 .formulario-criacao p {
   display: flex;
@@ -433,4 +430,11 @@ padding-left: 5px;
   color: #e5cca1;
   background-color: #383127;
   font-size: large;
+}
+.texto_imagem{
+   display: flex;
+  font-size: large;
+  justify-items: center;
+  align-items: center;
+  width: fit-content;
 }

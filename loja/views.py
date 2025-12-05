@@ -5,6 +5,7 @@ from datetime import datetime,date
 # Create your views here.
 def index(request):
     produtos=Produto.objects.filter(ativo=True).order_by('-data_cadastro')
+    print(ImagemProduto.objects.all().values())
     return render(request,'./loja/static/html/index.html',{'produtos':produtos})
 def produto(request,slug):
     produto_principal=Produto.objects.filter(slug=slug)
@@ -238,7 +239,7 @@ def produtos(request):
         else:
             # imagem padrão
             imagens_produtos[produto.id] = '/static/imagens/perfumes_1.jpg'
-
+    print(produtos_.values())
     return render(request, "./loja/static/html/administrador/produtos.html", {
         'produtos': produtos_,
         'imagens_produtos': imagens_produtos
@@ -275,7 +276,7 @@ def criar_produto(request):
     if user:
         if user.tipo_usuario != "Administrador":
             return redirect('perfil')
-
+    retorno={"retorno":'','sinal_retorno':True}
     try:
         categorias = Categoria.objects.all()
 
@@ -293,7 +294,7 @@ def criar_produto(request):
             tamanho = request.POST.get('tamanho')
 
            # -------- IMAGENS --------
-            imagem_1 = request.FILES.get('imagem_1')
+            imagem_1 = request.FILES.get('imagem_1_principal')
             imagem_2 = request.FILES.get('imagem_2')
             imagem_3 = request.FILES.get('imagem_3')
             imagem_4 = request.FILES.get('imagem_4')
@@ -317,20 +318,23 @@ def criar_produto(request):
                 preco=preco,
                 estoque=estoque,
                 tamanho=tamanho,
+                imagem_principal=imagem_1
             )
             produto.save()
+            retorno={"retorno":produto.save(),"sinal_retorno":True}
+            if retorno["retorno"] != None:
+                retorno["sinal_retorno"]=False
+                return render(request, "./loja/static/html/administrador/produto_criar.html", {"categorias": categorias,"retorno":retorno})
             for img in imagens_validas:
                     i=ImagemProduto.objects.create(
                         produto=produto,
                         imagem=img
                     )
-                    i.save()
-
-
-
-            return redirect('lista_produtos')
+                    retorno={"retorno":i.save(),"sinal_retorno":True}
+            retorno={"retorno":"Produto Cadastrado com sucesso","sinal_retorno":False}
 
     except Exception as e:
         print("Erro:", e)
+        retorno={"retorno":e,"sinal_retorno":False}
 
-    return render(request, "./loja/static/html/administrador/produto_criar.html", {"categorias": categorias})
+    return render(request, "./loja/static/html/administrador/produto_criar.html", {"categorias": categorias,"retorno":retorno})

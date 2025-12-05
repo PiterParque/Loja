@@ -5,12 +5,15 @@
    <div class="produto_edit">
     <form action="" method="post">
     {% if produto %}
-        {% if imagens %}
+        {% if produto.imagem_principal %}
         <div class="carrosel_imagens_produtos">
             <div class="imagens_carrosel_produtos" id="imagens_carrosel_produtos">
-              {% for imagem in imagens %}
-            <img src="{{ imagem.imagem.url }}" alt="">
-               {% endfor %}
+              <img src="{{produto.imagem_principal.url }}" alt="">
+              {% if imagens %}
+                {% for imagem in imagens %}
+              <img src="{{ imagem.imagem.url }}" alt="">
+                {% endfor %}
+              {% endif %}
             </div>
             <button type="button" id="antes"><i class="fa-duotone fa-solid fa-arrow-down"></i></button>
             <button type="button" id="depois" ><i class="fa-duotone fa-solid fa-arrow-down"></i></button>
